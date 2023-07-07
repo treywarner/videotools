@@ -1,0 +1,29 @@
+<script src="<%= url('converter.js')%>"></script>
+
+<h1 class="display-4 py-3 mb-3 border-bottom">
+  Video Converter
+</h1>
+
+<div class="col-12">
+  <div class="row">
+    <form action="<%= url("/converter") %>" method="post" enctype="multipart/form-data">
+
+      <label class="form-label" for="file">Input File</label>
+      <div class="file-upload-wrapper col-6">
+        <input type="file" class="form-control" id="file" name="file" multiple />
+      </div>
+
+      <div class="form-group col-3 mt-1 mb-3">
+        <label for="format" class="mb-1">Output Format</label>
+        <select class="form-select " id="format" name="format">
+          <% converter_formats.each do |key, value| %>
+          <option value="<%=key%>"><%=key%></option>
+          <% end %>
+        </select>
+      </div>
+    
+    
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

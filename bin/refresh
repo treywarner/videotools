@@ -1,0 +1,13 @@
+#!/bin/bash
+
+bin/start $1 &
+START_PID=$!
+
+while inotifywait -e modify .; do
+	kill -INT $START_PID
+	SERVER_PID=$(lsof -t -i:$1)
+	kill $SERVER_PID
+	kill $!
+	bin/start $1 &
+	START_PID=$!
+done
